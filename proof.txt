@@ -1,0 +1,13 @@
+Our solution allows the participants to win every time.
+The idea is that each person writes the parity of the permutation he can infer on paper.
+
+Let us develop the reasoning.
+
+Prior to the game, each player receives a number from 1 to 14.
+Then the game master gives each player number. Sorting the players by ascending numbers gives them new numbers and effectively creates a permutation between their pre-game number and their rank in the ascending order.
+
+Now each player can only sort the other 13 players and needs to give itself an arbitrary rank, let us say 1.
+This allows the player to infer a permutation (which is not necessarely the real permutation but is particular to the player). The player can then assess the parity of this permutation. If the permutation is even, he writes 1. If the permutation is odd, he writes 0.
+
+With this system, two players following each other in the rankings will get different numbers. In fact, if two such players have rankings i and i+1 (i between 1 and 13), the only difference between the permutations they each infer is that each player will rank itself 1 and the other player i+1. Thus the permutations they infer differ by a single transposition and their parity are different. 
+Two players following each other in the rankings will then write different numbers on their paper.
