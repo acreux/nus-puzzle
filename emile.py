@@ -4,14 +4,17 @@ if __name__ == "__main__":
     import math
     import itertools
 
-    def permutation_index(permut):
+    def permutation_index(a):
         """Give the index of the permutation
         """
-        max_ind = len(permut)-1
-        motif = {}
-        for ind, i in enumerate(permut):
-            motif[max_ind-ind] = len([j for j in permut[ind+1:] if j < i])
-        return sum(math.factorial(k)*v for k, v in motif.iteritems())
+        a = list(a)
+        b = sorted(a)
+        inversions = 0
+        while a:
+            first = a.pop(0)
+            inversions += b.index(first)
+            b.remove(first)
+        return inversions % 2
 
     # Number of players
     p = 8
