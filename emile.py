@@ -4,7 +4,7 @@ if __name__ == "__main__":
     import math
     import itertools
 
-    def permutation(permut):
+    def permutatio_index(permut):
         max_ind = len(permut)-1
         motif = {}
         # print permut
@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
         return sum(math.factorial(k)*v for k, v in motif.iteritems())
 
-    p = 9
+    p = 7
 
     if p%2 == 0:
         magic_value = math.factorial(p-2)*2
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     colors = [-1 for _ in range(magic_value)]
 
     a = itertools.permutations(players, p)
-    colors[permutation(a.next())] = 1
+    colors[permutatio_index(a.next())] = 1
 
     while True:
         gen_permutations = itertools.permutations(players, p)
@@ -41,8 +41,8 @@ if __name__ == "__main__":
             # print 
             for ktuple, mtuple in zip(tuples, tuples[1:]):
                 # print k, m
-                k = permutation(ktuple)
-                m = permutation(mtuple)
+                k = permutatio_index(ktuple)
+                m = permutatio_index(mtuple)
                 # print m, k
                 # print len(colors)
                 # print ktuple, mtuple
@@ -76,17 +76,17 @@ if __name__ == "__main__":
         # print tuples
         for ktuple, mtuple in zip(tuples, tuples[1:]):
 
-            k = permutation(ktuple)
-            m = permutation(mtuple)
+            k = permutatio_index(ktuple)
+            m = permutatio_index(mtuple)
             
             if colors[k%magic_value] == colors[m%magic_value]:
                 continue
             else:
                 score += 1
 
-
     from pprint import pprint
-    # pprint(colors)
+    for i, z in zip(enumerate(colors), itertools.permutations(players, p)):
+        print i, z
     print score/(p-1)
 
     # motif = {}
