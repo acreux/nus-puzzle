@@ -13,13 +13,12 @@ if __name__ == "__main__":
 
         return sum(math.factorial(k)*v for k, v in motif.iteritems())
 
-    p = 7
+    p = 8
 
     if p%2 == 0:
-        magic_value = math.factorial(p-2)*2
+        magic_value = math.factorial(p)
     else:
-        magic_value = math.factorial(p-1)*2
-
+        magic_value = math.factorial(p)
 
     players = [i for i in string.ascii_lowercase][:p]
 
@@ -70,6 +69,10 @@ if __name__ == "__main__":
     score = 0
     print 'Number of permutatations filled: %d out of %d' %(len(colors), math.factorial(p))
 
+    # motif = [1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0. 0, 1]
+
+
+
     for permutation in itertools.permutations(players, p):
         # print order
         tuples = [((permutation[i],) + permutation[:i] + permutation[i+1:]) for i in range(p)]
@@ -78,6 +81,7 @@ if __name__ == "__main__":
 
             k = permutatio_index(ktuple)
             m = permutatio_index(mtuple)
+
             
             if colors[k%magic_value] == colors[m%magic_value]:
                 continue
@@ -91,10 +95,10 @@ if __name__ == "__main__":
 
     # motif = {}
     # for ind, permutation in enumerate(itertools.permutations(players, p-1)):
-    #     if ind<40320:
-    #         motif[ind] = colors[permutation]
+    #     if ind<48:
+    #         motif[ind] = colors[permutatio_index(permutation)]
     #     else:
-    #         if motif[ind%40320] != colors[permutation]:
+    #         if motif[ind%48] != colors[permutation]:
     #             print ind, "perdu", colors[permutation]
     #     # # print ind, ind%4, permutation, colors[permutation]
     #     # print ind, colors[permutation]
