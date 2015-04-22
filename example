@@ -1,22 +1,25 @@
-Let s say we have a list of 14 players with their number associated.
+Let us say we have a list of 14 players with their number associated.
 
-Their order will be:
-p1, p2, p3, p4, p5, p6, p..., p14
+p5 is the number of the person which received the 5th highest number.
 
-Let s say p6 and p7 are tow players which follow themselves in order(but they do not know that!), and then should have different colors.
+Their rankings will be:
+p1, p2, p3, p4, p5, p6, ..., p14
+
+Let us say p6 and p7 are two players which follow themselves in the rankings (but they do not know that!), and then should have different colors.
 
 What p6 sees is:
 p1, p2, p3, p4, p5, p7, p8....
 
-Let s note it the view:
+By convention, each player puts itself first in the permutation he infers. 
+The permutation for p6 is then the following:
 p6, p1, p2, p3, p4, p5, p7, p8, p9..., p14
 
 What p7 sees is:
 p1, p2, p3, p4, p5, p6, p8...
 
-Let s note it the view:
+The permutation for p7 is then the following:
 p7, p1, p2, p3, p4, p5, p6, p8, ..., p14
 
-Views are in fact permutations of p1, p2, ...p14.
-And signatures of the view of p6 and the view of p7 have different signatures. ( There is only one transition between both permutations.)
-If the color is the signature of the view, we will have alternate colors at the end.
+The permutations inferred by each player are in fact permutations of p1, p2, ...p14.
+And the parities of the permutation of p6 and the permutation of p7 have different signatures (the two permutations differ by only one transposition)
+If we put 0 for the odd permutations and 1 for the even permutations, we will have alternate bits at the end.

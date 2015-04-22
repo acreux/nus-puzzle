@@ -11,3 +11,31 @@ This allows the player to infer a permutation (which is not necessarely the real
 
 With this system, two players following each other in the rankings will get different numbers. In fact, if two such players have rankings i and i+1 (i between 1 and 13), the only difference between the permutations they each infer is that each player will rank itself 1 and the other player i+1. Thus the permutations they infer differ by a single transposition and their parity are different. 
 Two players following each other in the rankings will then write different numbers on their paper.
+
+We give a detailed example below:
+
+Let us say we have a list of 14 players with their number associated.
+
+p5 is the number of the person which received the 5th highest number.
+
+Their rankings will be:
+p1, p2, p3, p4, p5, p6, ..., p14
+
+Let us say p6 and p7 are two players which follow themselves in the rankings (but they do not know that!), and then should have different colors.
+
+What p6 sees is:
+p1, p2, p3, p4, p5, p7, p8....
+
+By convention, each player puts itself first in the permutation he infers. 
+The permutation for p6 is then the following:
+p6, p1, p2, p3, p4, p5, p7, p8, p9..., p14
+
+What p7 sees is:
+p1, p2, p3, p4, p5, p6, p8...
+
+The permutation for p7 is then the following:
+p7, p1, p2, p3, p4, p5, p6, p8, ..., p14
+
+The permutations inferred by each player are in fact permutations of p1, p2, ...p14.
+And the parities of the permutation of p6 and the permutation of p7 have different signatures (the two permutations differ by only one transposition, namely exchanging p6 and p7).
+If we put 0 for the odd permutations and 1 for the even permutations, we will have alternate bits at the end.
