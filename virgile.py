@@ -3,42 +3,17 @@ import string
 import math
 import itertools
 
-def permutation_index(permut):
-    """Give the index of the permutation
+def signature(permut):
+    """Give the signature of the permutation
     """
-    max_ind = len(permut)-1
-    motif = {}
-    # print permut
-    for ind, i in enumerate(permut):
-        motif[max_ind-ind] = len([j for j in permut[ind+1:] if j < i])
-
-    return sum(math.factorial(k)*v for k, v in motif.iteritems())
-
-def color_from_index(index):
-    """From the index of the permutation, return 0 or 1
-    """
-
-    if index == 0:
-        return 1
-    k = 0
-    new_magic = math.factorial(k)
-    while new_magic <= index:
-        magic = new_magic
-        k += 1
-        new_magic = math.factorial(k)
-
-    # print magic
-    div = index/magic
-    mod = index%magic
-
-    if div%2 == 1:
-        return 1-color_from_index(mod)
-    else:
-        return color_from_index(mod)
-
-# for i in range(30):
-#     print i, "   ", color_from_index(i)
-# print color_from_index(12)
+    permut = list(permut)
+    b = sorted(permut)
+    inversions = 0
+    while permut:
+        first = permut.pop(0)
+        inversions += b.index(first)
+        b.remove(first)
+    return inversions % 2
 
 
 def check(p):
@@ -115,7 +90,7 @@ def game(players_numbers):
 
         tuple_p = (p, ) + tuple(sorted_tuple_players) 
 
-        return color_from_index(permutation_index(tuple_p))        
+        return signature(tuple_p)  
 
     # Color associated to p
     colors = {}
@@ -135,13 +110,13 @@ def game(players_numbers):
     return [colors[i[0]] for i in items_players]
 
 
-def check_many_games(p=14, n=10000):
+def check_many_games(p=14, n=10**7):
     for i in range(n):
         players = generate_players(p)
         if not game(players):
             print "You lose"
             return
-        if not i%1000:
+        if not i%10000:
             print i, " done"
     print "Win"
 
