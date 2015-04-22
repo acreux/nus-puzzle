@@ -13,53 +13,49 @@ if __name__ == "__main__":
 
         return sum(math.factorial(k)*v for k, v in motif.iteritems())
 
-
-    p = 8
-    players = [i for i in string.ascii_lowercase][:p]
-
-
-    a = itertools.permutations(players, p)
-    colors[permutation(a.next())] = 1
-    
-    new_order_gen = itertools.permutations(players, p)
-    score = 0
-
+    p = 9
 
     if p%2 == 0:
         magic_value = math.factorial(p-2)*2
     else:
         magic_value = math.factorial(p-1)*2
 
-    # colors = [-1 for _ in range(magic_value)]
-    color = {}
+
+    players = [i for i in string.ascii_lowercase][:p]
+
+    colors = [-1 for _ in range(magic_value)]
+
+    a = itertools.permutations(players, p)
+    colors[permutation(a.next())] = 1
 
     while True:
         gen_permutations = itertools.permutations(players, p)
-        for view in gen_permutations:
-            # print view
+        for permutation in gen_permutations:
+            # print permutation
             # print order
-            tuple3 = [((view[i],) + view[:i] + view[i+1:]) for i in range(p)]
-            # print tuple3
+            tuples = [((permutation[i],) + permutation[:i] + permutation[i+1:]) for i in range(p)]
+            # print tuples
             # break
-            # print view
-            # print tuple3
+            # print permutation
+            # print tuples
             # print 
-            for ktuple, mtuple in zip(tuple3, tuple3[1:]):
+            for ktuple, mtuple in zip(tuples, tuples[1:]):
                 # print k, m
                 k = permutation(ktuple)
                 m = permutation(mtuple)
-
+                # print m, k
+                # print len(colors)
                 # print ktuple, mtuple
                 # print k, m
 
-                if k in colors and m in colors:
+                if colors[k%magic_value] != -1 and colors[m%magic_value] != -1:
                     if colors[k%magic_value] == colors[m%magic_value]:
                         print "perdu"
-                        print view, k, m
+                        print permutation, k, m
                         continue
-                elif k in colors:
+                elif colors[k%magic_value] != -1:
                     colors[m%magic_value] = 1-colors[k%magic_value]
-                elif m in colors:
+                elif colors[m%magic_value] != -1:
                     colors[k%magic_value] = 1-colors[m%magic_value]
                 else:
                     pass
@@ -72,12 +68,13 @@ if __name__ == "__main__":
             print len(colors)
 
     score = 0
-    print len(colors)
-    for view in itertools.permutations(players, p):
+    print 'Number of permutatations filled: %d out of %d' %(len(colors), math.factorial(p))
+
+    for permutation in itertools.permutations(players, p):
         # print order
-        tuple3 = [((view[i],) + view[:i] + view[i+1:]) for i in range(p)]
-        # print tuple3
-        for ktuple, mtuple in zip(tuple3, tuple3[1:]):
+        tuples = [((permutation[i],) + permutation[:i] + permutation[i+1:]) for i in range(p)]
+        # print tuples
+        for ktuple, mtuple in zip(tuples, tuples[1:]):
 
             k = permutation(ktuple)
             m = permutation(mtuple)
@@ -93,15 +90,15 @@ if __name__ == "__main__":
     print score/(p-1)
 
     # motif = {}
-    # for ind, view in enumerate(itertools.permutations(players, p-1)):
+    # for ind, permutation in enumerate(itertools.permutations(players, p-1)):
     #     if ind<40320:
-    #         motif[ind] = colors[view]
+    #         motif[ind] = colors[permutation]
     #     else:
-    #         if motif[ind%40320] != colors[view]:
-    #             print ind, "perdu", colors[view]
-    #     # # print ind, ind%4, view, colors[view]
-    #     # print ind, colors[view]
-    #     # if not((ind%4 in (1, 2) and colors[view]==1) or (ind%4 in (0,3) and colors[view]==0)):
+    #         if motif[ind%40320] != colors[permutation]:
+    #             print ind, "perdu", colors[permutation]
+    #     # # print ind, ind%4, permutation, colors[permutation]
+    #     # print ind, colors[permutation]
+    #     # if not((ind%4 in (1, 2) and colors[permutation]==1) or (ind%4 in (0,3) and colors[permutation]==0)):
     #         # print "perdu"
     #         pass
 
